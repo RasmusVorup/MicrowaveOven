@@ -43,6 +43,7 @@ namespace Microwave.Classes.Controllers
             myCooker = cooker;
             myLight = light;
             myDisplay = display;
+            _powerTubeConfig = powerTubeConfig;
         }
 
         private void ResetValues()
