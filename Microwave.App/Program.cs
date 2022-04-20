@@ -8,6 +8,7 @@ namespace Microwave.App
     {
         static void Main(string[] args)
         {
+	        int powerTubeConfig = 500;
             Button startCancelButton = new Button();
             Button powerButton = new Button();
             Button timeButton = new Button();
@@ -18,7 +19,7 @@ namespace Microwave.App
 
             Display display = new Display(output);
 
-            PowerTube powerTube = new PowerTube(output);
+            PowerTube powerTube = new PowerTube(output,powerTubeConfig);
 
             Light light = new Light(output);
 
@@ -26,7 +27,7 @@ namespace Microwave.App
 
             CookController cooker = new CookController(timer, display, powerTube);
 
-            UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker);
+            UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, powerTubeConfig);
 
             // Finish the double association
             cooker.UI = ui;
