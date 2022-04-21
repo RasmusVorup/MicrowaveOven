@@ -83,7 +83,7 @@ namespace Microwave.Test.Unit
         [Test]
         public void Stop_NotStarted_NoThrow()
         {
-            Assert.That( () => uut.Stop(), Throws.Nothing);
+            Assert.That(() => uut.Stop(), Throws.Nothing);
         }
 
         [Test]
@@ -145,24 +145,24 @@ namespace Microwave.Test.Unit
             // wait for ticks, only a little longer
             pause.WaitOne(ticks * 1000 + 100);
 
-            Assert.That(uut.TimeRemaining, Is.EqualTo(5-ticks*1));
+            Assert.That(uut.TimeRemaining, Is.EqualTo(5 - ticks * 1));
         }
 
         [Test]
         public void IncreaseTimeMethodAddsThirty()
         {
-            uut.IncreaseTime();
-
-            int time = uut.TimeRemaining;
+            uut.Start(60);
 
             uut.IncreaseTime();
 
-            Assert.That(uut.TimeRemaining,Is.EqualTo(time + 30));
+            Assert.That(uut.TimeRemaining, Is.EqualTo(90));
         }
 
         [Test]
         public void DecreaseTimeMethodRemovesThirty()
         {
+            uut.Start(60);
+
             uut.IncreaseTime();
 
             int time = uut.TimeRemaining;
@@ -175,13 +175,13 @@ namespace Microwave.Test.Unit
         [Test]
         public void DecreaseTimeResultsInTimeRemainingIsBelowZero()
         {
-            
+            uut.Start(29);
+
             uut.DecreaseTime();
 
-            Assert.That(uut.TimeRemaining,Is.EqualTo(0));
-
+            Assert.That(uut.TimeRemaining, Is.EqualTo(0));
         }
 
-        
+
     }
 }
