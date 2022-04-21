@@ -77,6 +77,18 @@ namespace Microwave.Classes.Controllers
                     time += 1;
                     myDisplay.ShowTime(time, 0);
                     break;
+                case States.COOKING:
+                    myCooker.IncreaseTime();
+                    break;
+            }
+        }
+        public void OnDecreaseTimePressed(object sender, EventArgs e)
+        {
+            switch (myState)
+            {
+                case States.COOKING:
+                    myCooker.DecreaseTime();
+                    break;
             }
         }
 
