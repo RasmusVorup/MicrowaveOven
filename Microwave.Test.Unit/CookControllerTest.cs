@@ -28,6 +28,26 @@ namespace Microwave.Test.Unit
         }
 
         [Test]
+        public void IncreaseTimeCalled()
+        {
+            uut.StartCooking(50, 60);
+
+            uut.IncreaseTime();
+
+            timer.Received(1).IncreaseTime();
+        }
+
+        [Test]
+        public void DecreaseTimeCalled()
+        {
+            uut.StartCooking(50, 60);
+
+            uut.DecreaseTime();
+
+            timer.Received(1).DecreaseTime();
+        }
+
+        [Test]
         public void StartCooking_ValidParameters_TimerStarted()
         {
             uut.StartCooking(50, 60);

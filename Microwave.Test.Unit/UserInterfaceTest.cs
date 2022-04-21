@@ -13,6 +13,7 @@ namespace Microwave.Test.Unit
 
         private IButton powerButton;
         private IButton timeButton;
+        private IButton decreaseTimeButton;
         private IButton startCancelButton;
 
         private IDoor door;
@@ -29,6 +30,7 @@ namespace Microwave.Test.Unit
         {
             powerButton = Substitute.For<IButton>();
             timeButton = Substitute.For<IButton>();
+            decreaseTimeButton = Substitute.For<IButton>();
             startCancelButton = Substitute.For<IButton>();
             door = Substitute.For<IDoor>();
             light = Substitute.For<ILight>();
@@ -37,7 +39,7 @@ namespace Microwave.Test.Unit
             buzzer = Substitute.For<IBuzzer>();
 
             uut = new UserInterface(
-                powerButton, timeButton, startCancelButton,
+                powerButton, timeButton, decreaseTimeButton, startCancelButton,
                 door,
                 display,
                 light,
@@ -339,6 +341,27 @@ namespace Microwave.Test.Unit
             light.Received(1).TurnOff();
         }
 
+        [Test]
+        public void TimeButtonPressed_CookControlCallsIncreaseTime()
+        {
+            powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            timeButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            startCancelButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            timeButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+
+            cooker.Received(1).IncreaseTime();
+        }
+
+        [Test]
+        public void DecreaseTimeButtonPressed_CookControlCallsDecreaseTime()
+        {
+            powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            timeButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            startCancelButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            decreaseTimeButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+
+            cooker.Received(1).DecreaseTime();
+        }
 
     }
 
