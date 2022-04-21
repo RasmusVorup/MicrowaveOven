@@ -18,7 +18,6 @@ namespace Microwave.Test.Unit
         {
             output = Substitute.For<IOutput>();
             uut = new PowerTube(output,700);
-            wrongPowerTube = new PowerTube(output, 400);
         }
 
         [TestCase(1)]
@@ -67,8 +66,20 @@ namespace Microwave.Test.Unit
         [Test]
         public void WrongPowerTubeMaxThrowsExeption()
         {
+	        uut.PowerTubeMax = 400;
+	        Assert.Throws<System.ArgumentException>(() => uut.TurnOn(50));
+        }
+
+        [TestCase(500)]
+        [TestCase(700)]
+        [TestCase(800)]
+        [TestCase(1000)]
+        public void CorrectPowerTubePropertyChanged(int maxPower)
+        {
 	        
-	        Assert.Throws<System.ArgumentException>(() => wrongPowerTube.TurnOn(50));
+	        uut.PowerTubeValueCheck(maxPower);
+
+	        Assert.That(uut.PowerTubeMax,Is.EqualTo(maxPower));
         }
 
     }
