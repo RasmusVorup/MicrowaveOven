@@ -8,7 +8,7 @@ namespace Microwave.App
     {
         static void Main(string[] args)
         {
-	         int powerTubeConfig = 500;
+	         int powerTubeConfig = 700;
             Button startCancelButton = new Button();
             Button powerButton = new Button();
             Button timeButton = new Button();
@@ -39,6 +39,7 @@ namespace Microwave.App
             // Simulate a simple sequence
 
             powerButton.Press();
+            
 
             timeButton.Press();
 
@@ -51,7 +52,7 @@ namespace Microwave.App
 
             //System.Console.ReadLine();
 
-            System.Console.WriteLine("When you press 'x', the program will stop\nWhen you press 'i', the time will increase by 30 sec,\nWhen you press 'd', the time will decrease by 30 sec");
+            System.Console.WriteLine("When you press 'x', the program will stop\nWhen you press 'i', the time will increase by 30 sec,\nWhen you press 'd', the time will decrease by 30 sec, \nWhen you press 'p', the power increases by 50 W ");
             var cont = true;
             while (cont)
             {
@@ -70,6 +71,9 @@ namespace Microwave.App
                     case 'D':
                         decreaseTimeButton.Press();
                         break;
+                    case 'p':
+                        powerButton.Press();
+	                    break;
 
                 }
             }
