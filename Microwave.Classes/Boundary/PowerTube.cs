@@ -54,8 +54,7 @@ namespace Microwave.Classes.Boundary
 
 	        if (validPowerTubeConfigs.Contains(powerTubeInput) == false)
 	        {
-		        throw new ArgumentOutOfRangeException("Max power", powerTubeInput,
-			        "must be either 500,700,800 or 1000.");
+		        throw new ArgumentException("Max power must be either 500,700,800 or 1000.");
             }
 	        
             
