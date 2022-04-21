@@ -28,6 +28,26 @@ namespace Microwave.Test.Unit
         }
 
         [Test]
+        public void IncreaseTimeCalled()
+        {
+            uut.StartCooking(50, 60);
+
+            uut.IncreaseTime();
+
+            timer.Received(1).IncreaseTime();
+        }
+
+        [Test]
+        public void DecreaseTimeCalled()
+        {
+            uut.StartCooking(50, 60);
+
+            uut.DecreaseTime();
+
+            timer.Received(1).DecreaseTime();
+        }
+
+        [Test]
         public void StartCooking_ValidParameters_TimerStarted()
         {
             uut.StartCooking(50, 60);
@@ -43,15 +63,18 @@ namespace Microwave.Test.Unit
             powerTube.Received().TurnOn(50);
         }
 
-        [Test]
-        public void Cooking_TimerTick_DisplayCalled()
+        [TestCase(115,1,55)]
+        [TestCase(0, 0, 0)]
+        [TestCase(-10, 0, 0)]
+        [TestCase(150, 2, 30)]
+        public void Cooking_TimerTick_DisplayCalled(int remaining, int min, int sec)
         {
             uut.StartCooking(50, 60);
 
-            timer.TimeRemaining.Returns(115);
+            timer.TimeRemaining.Returns(remaining);
             timer.TimerTick += Raise.EventWith(this, EventArgs.Empty);
 
-            display.Received().ShowTime(1, 55);
+            display.Received().ShowTime(min, sec);
         }
 
         [Test]

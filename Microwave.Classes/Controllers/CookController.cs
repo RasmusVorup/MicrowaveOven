@@ -44,6 +44,22 @@ namespace Microwave.Classes.Controllers
             isCooking = true;
         }
 
+        public void IncreaseTime()
+        {
+            if (isCooking)
+            {
+                myTimer.IncreaseTime();
+            }
+        }
+
+        public void DecreaseTime()
+        {
+            if (isCooking)
+            {
+                myTimer.DecreaseTime();
+            }
+        }
+
         public void Stop()
         {
             isCooking = false;
@@ -66,7 +82,15 @@ namespace Microwave.Classes.Controllers
             if (isCooking)
             {
                 int remaining = myTimer.TimeRemaining;
-                myDisplay.ShowTime(remaining / 60, remaining % 60);
+                if (((remaining / 60) <= 0) && ((remaining % 60) <= 0))
+                {
+                    myDisplay.ShowTime(0, 0);
+                }
+                else
+                {
+                    myDisplay.ShowTime(remaining / 60, remaining % 60);
+
+                }
             }
         }
     }

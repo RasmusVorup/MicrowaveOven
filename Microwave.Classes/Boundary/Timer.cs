@@ -33,6 +33,23 @@ namespace Microwave.Classes.Boundary
             timer.Enabled = false;
         }
 
+        public void IncreaseTime()
+        {
+            TimeRemaining += 30;
+        }
+        public void DecreaseTime()
+        {
+
+            if ((TimeRemaining - 30) < 0)
+            {
+                TimeRemaining = 0;
+            }
+            else
+            {
+                TimeRemaining -= 30;
+            }
+        }
+
         private void Expire()
         {
             timer.Enabled = false;
