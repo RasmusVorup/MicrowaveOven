@@ -8,7 +8,7 @@ namespace Microwave.App
     {
         static void Main(string[] args)
         {
-	        int powerTubeConfig = 500;
+	         int powerTubeConfig = 500;
             Button startCancelButton = new Button();
             Button powerButton = new Button();
             Button timeButton = new Button();
