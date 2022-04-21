@@ -172,6 +172,16 @@ namespace Microwave.Test.Unit
             Assert.That(uut.TimeRemaining, Is.EqualTo(time - 30));
         }
 
+        [Test]
+        public void DecreaseTimeResultsInTimeRemainingIsBelowZero()
+        {
+            
+            uut.DecreaseTime();
+
+            Assert.That(uut.TimeRemaining,Is.EqualTo(0));
+
+        }
+
         
     }
 }
