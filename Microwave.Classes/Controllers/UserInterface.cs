@@ -24,6 +24,7 @@ namespace Microwave.Classes.Controllers
         public UserInterface(
             IButton powerButton,
             IButton timeButton,
+            IButton decreaseTimeButton,
             IButton startCancelButton,
             IDoor door,
             IDisplay display,
@@ -33,6 +34,7 @@ namespace Microwave.Classes.Controllers
         {
             powerButton.Pressed += new EventHandler(OnPowerPressed);
             timeButton.Pressed += new EventHandler(OnTimePressed);
+            decreaseTimeButton.Pressed += new EventHandler(OnDecreaseTimePressed);
             startCancelButton.Pressed += new EventHandler(OnStartCancelPressed);
 
             door.Closed += new EventHandler(OnDoorClosed);

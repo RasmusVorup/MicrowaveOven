@@ -11,6 +11,8 @@ namespace Microwave.App
             Button startCancelButton = new Button();
             Button powerButton = new Button();
             Button timeButton = new Button();
+            Button decreaseTimeButton = new Button();
+
 
             Door door = new Door();
 
@@ -28,7 +30,7 @@ namespace Microwave.App
 
             Buzzer buzzer = new Buzzer(output);
 
-            UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, buzzer);
+            UserInterface ui = new UserInterface(powerButton, timeButton, decreaseTimeButton,startCancelButton, door, display, light, cooker, buzzer);
 
             // Finish the double association
             cooker.UI = ui;
@@ -43,10 +45,33 @@ namespace Microwave.App
 
             // The simple sequence should now run
 
-            System.Console.WriteLine("When you press enter, the program will stop");
+            //System.Console.WriteLine("When you press enter, the program will stop");
             // Wait for input
 
-            System.Console.ReadLine();
+            //System.Console.ReadLine();
+
+            System.Console.WriteLine("When you press 'x', the program will stop\nWhen you press 'i', the time will increase by 30 sec,\nWhen you press 'd', the time will decrease by 30 sec");
+            var cont = true;
+            while (cont)
+            {
+                var key = Console.ReadKey(true);
+                switch (key.KeyChar)
+                {
+                    case 'x':
+                    case 'X':
+                        cont = false;
+                        break;
+                    case 'i':
+                    case 'I':
+                        timeButton.Press();
+                        break;
+                    case 'd':
+                    case 'D':
+                        decreaseTimeButton.Press();
+                        break;
+
+                }
+            }
         }
     }
 }
