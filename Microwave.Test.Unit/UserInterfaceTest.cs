@@ -26,8 +26,6 @@ namespace Microwave.Test.Unit
         private IBuzzer buzzer;
         private int powertubeConfig = 500;
 
-        private int powertubeConfig = 500;
-
         [SetUp]
         public void Setup()
         {
