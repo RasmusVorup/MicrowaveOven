@@ -47,6 +47,7 @@ namespace Microwave.Classes.Controllers
             myDisplay = display;
             myBuzzer = buzzer;
             _powerTubeConfig = powerTubeConfig;
+
         }
 
         private void ResetValues()

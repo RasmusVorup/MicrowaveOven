@@ -8,18 +8,17 @@ namespace Microwave.Classes.Boundary
 
 	public class PowerTube : IPowerTube
 	{
-
 		private IOutput myOutput;
 
 		private bool IsOn = false;
 
 		public int PowerTubeMax { get; set; }
 		public PowerTube(IOutput output, int powerTubeMax)
-        {
-            myOutput = output;
+    {
+          myOutput = output;
 	        PowerTubeValueCheck(powerTubeMax);
 
-        }
+    }
 
         public void TurnOn(int power)
         {
