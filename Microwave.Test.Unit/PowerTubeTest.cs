@@ -1,4 +1,5 @@
-﻿using Microwave.Classes.Boundary;
+﻿using System;
+using Microwave.Classes.Boundary;
 using Microwave.Classes.Interfaces;
 using NSubstitute;
 using NSubstitute.Core.Arguments;
@@ -16,7 +17,7 @@ namespace Microwave.Test.Unit
         public void Setup()
         {
             output = Substitute.For<IOutput>();
-            uut = new PowerTube(output);
+            uut = new PowerTube(output,700);
         }
 
         [TestCase(1)]
@@ -61,5 +62,26 @@ namespace Microwave.Test.Unit
             uut.TurnOn(50);
             Assert.Throws<System.ApplicationException>(() => uut.TurnOn(60));
         }
+
+        [Test]
+        public void WrongPowerTubeMaxThrowsExeption()
+        {
+	        
+	        Assert.Throws<ArgumentException>(() => uut.PowerTubeValueCheck(400));
+            
+        }
+
+        [TestCase(500)]
+        [TestCase(700)]
+        [TestCase(800)]
+        [TestCase(1000)]
+        public void CorrectPowerTubePropertyChanged(int maxPower)
+        {
+	        
+	        uut.PowerTubeValueCheck(maxPower);
+
+	        Assert.That(uut.PowerTubeMax,Is.EqualTo(maxPower));
+        }
+
     }
 }

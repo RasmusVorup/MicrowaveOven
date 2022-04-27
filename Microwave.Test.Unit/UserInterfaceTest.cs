@@ -24,6 +24,7 @@ namespace Microwave.Test.Unit
         private ICookController cooker;
 
         private IBuzzer buzzer;
+        private int powertubeConfig = 500;
 
         private int powertubeConfig = 500;
 
@@ -39,6 +40,7 @@ namespace Microwave.Test.Unit
             display = Substitute.For<IDisplay>();
             cooker = Substitute.For<ICookController>();
             buzzer = Substitute.For<IBuzzer>();
+            
 
 
             uut = new UserInterface(
@@ -91,19 +93,21 @@ namespace Microwave.Test.Unit
         }
 
         [Test]
-        public void Ready_14PowerButton_PowerIs700()
+        public void Ready_XPowerButtonPresses_PowerIsMax()
         {
-            for (int i = 1; i <= 14; i++)
+	        
+            for (int i = 1; i <= powertubeConfig/50; i++)
             {
                 powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             }
-            display.Received(1).ShowPower(Arg.Is<int>(700));
+            display.Received(1).ShowPower(Arg.Is<int>(powertubeConfig));
         }
 
         [Test]
-        public void Ready_15PowerButton_PowerIs50Again()
+        public void PowerIs_50_AccordingToTimesPowerButtonPressed_AndMaxPowertubeConfig()
         {
-            for (int i = 1; i <= 15; i++)
+            
+            for (int i = 1; i <= (powertubeConfig/50)+1; i++)
             {
                 powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             }
@@ -223,7 +227,7 @@ namespace Microwave.Test.Unit
         [Test]
         public void Ready_FullPower_CookerIsCalledCorrectly()
         {
-            for (int i = 50; i <= 700; i += 50)
+            for (int i = 50; i <= powertubeConfig; i += 50)
             {
                 powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             }
@@ -234,7 +238,7 @@ namespace Microwave.Test.Unit
             // Should call with correct values
             startCancelButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
 
-            cooker.Received(1).StartCooking(700, 60);
+            cooker.Received(1).StartCooking(powertubeConfig, 60);
 
         }
 

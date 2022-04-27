@@ -46,7 +46,8 @@ namespace Microwave.Classes.Controllers
             myLight = light;
             myDisplay = display;
             myBuzzer = buzzer;
-            _powerTubeConfig = _powerTubeConfig;
+            _powerTubeConfig = powerTubeConfig;
+
         }
 
         private void ResetValues()
@@ -64,7 +65,7 @@ namespace Microwave.Classes.Controllers
                     myState = States.SETPOWER;
                     break;
                 case States.SETPOWER:
-                    powerLevel = (powerLevel >= 700 ? 50 : powerLevel+50);
+                    powerLevel = (powerLevel >= _powerTubeConfig ? 50 : powerLevel+50);
                     myDisplay.ShowPower(powerLevel);
                     break;
             }

@@ -1,26 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microwave.Classes.Interfaces;
 
 namespace Microwave.Classes.Boundary
 {
-    public class PowerTube : IPowerTube
+	
+
+	public class PowerTube : IPowerTube
+	{
+		private IOutput myOutput;
+
+		private bool IsOn = false;
+
+		public int PowerTubeMax { get; set; }
+		public PowerTube(IOutput output, int powerTubeMax)
     {
-        private IOutput myOutput;
+          myOutput = output;
+	        PowerTubeValueCheck(powerTubeMax);
 
-        private bool IsOn = false;
-
-        public int PowerTubeMax { get; set; }
-
-        public PowerTube(IOutput output)
-        {
-            myOutput = output;
-        }
+    }
 
         public void TurnOn(int power)
         {
-            if (power < 1 || 700 < power)
+            
+            if (power < 1 || PowerTubeMax < power)
             {
-                throw new ArgumentOutOfRangeException("power", power, "Must be between 1 and 700 (incl.)");
+                throw new ArgumentOutOfRangeException("power", power, "Must be between 1 and " + PowerTubeMax + " (incl.)");
             }
 
             if (IsOn)
@@ -41,5 +46,23 @@ namespace Microwave.Classes.Boundary
 
             IsOn = false;
         }
-    }
+
+        public void PowerTubeValueCheck(int powerTubeInput)
+        {
+	        List<int> validPowerTubeConfigs = new List<int>() {500,700,800,1000};
+
+	        if (validPowerTubeConfigs.Contains(powerTubeInput) == false)
+	        {
+		        throw new ArgumentException("Max power must be either 500,700,800 or 1000.");
+	        }
+	        else
+	        {
+		        PowerTubeMax = powerTubeInput;
+	        }
+
+
+
+        }
+
+	}
 }
