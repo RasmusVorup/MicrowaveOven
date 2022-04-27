@@ -25,6 +25,8 @@ namespace Microwave.Test.Unit
 
         private IBuzzer buzzer;
 
+        private int powertubeConfig = 500;
+
         [SetUp]
         public void Setup()
         {
@@ -38,13 +40,15 @@ namespace Microwave.Test.Unit
             cooker = Substitute.For<ICookController>();
             buzzer = Substitute.For<IBuzzer>();
 
+
             uut = new UserInterface(
                 powerButton, timeButton, decreaseTimeButton, startCancelButton,
                 door,
                 display,
                 light,
                 cooker, 
-                buzzer);
+                buzzer,
+                powertubeConfig);
         }
 
         [Test]
