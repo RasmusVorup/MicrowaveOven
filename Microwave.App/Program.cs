@@ -31,7 +31,7 @@ namespace Microwave.App
 
             Buzzer buzzer = new Buzzer(output);
 
-            UserInterface ui = new UserInterface(powerButton, timeButton, decreaseTimeButton,startCancelButton, door, display, light, cooker, buzzer);
+            UserInterface ui = new UserInterface(powerButton, timeButton, decreaseTimeButton,startCancelButton, door, display, light, cooker, buzzer, powerTubeConfig);
 
             // Finish the double association
             cooker.UI = ui;
